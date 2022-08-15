@@ -8,7 +8,7 @@ import { userRows } from '../dummyData'
 const Container = styled.div`
     width: 100%;
     height: 400px;
-    margin: 20px;
+    padding: 20px;
 `
 const User = styled.div`
     display: flex;

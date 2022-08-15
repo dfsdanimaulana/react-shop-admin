@@ -9,6 +9,7 @@ import {
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { boxShadow } from '../components/FeaturedInfo'
+import { useState, useEffect } from 'react'
 
 const Container = styled.div`
     padding: 20px;
@@ -32,7 +33,7 @@ const UserContainer = styled.div`
     margin-top: 20px;
 `
 const UserProfile = styled.div`
-    padding: 10px;
+    padding: 20px;
     flex: 1;
     ${boxShadow}
 `
@@ -74,11 +75,12 @@ const UserInfo = styled.div`
 `
 
 const iconStyle = {
-    fontSize: '16px !important'
+    fontSize: '14px !important'
 }
 
 const InfoTitle = styled.span`
     margin-left: 10px;
+    font-weight: 600;
 `
 
 const FormUpdate = styled.form`
@@ -116,6 +118,7 @@ const FormField = styled.div`
 const Label = styled.label`
     font-size: 14px;
     margin-bottom: 5px;
+    font-style: italic;
 `
 const Input = styled.input`
     &,
@@ -123,7 +126,8 @@ const Input = styled.input`
         border: none;
         border-bottom: 1px solid gray;
         outline: none;
-        padding: 10px;
+        padding: 10px 0;
+        font-weight: 600;
     }
 `
 const FormImage = styled.img`
@@ -157,6 +161,48 @@ const FormButton = styled.button`
 
 export default function User() {
     const { userId } = useParams()
+    const [user, setUser] = useState({
+        username: '',
+        full_name: '',
+        birthday: '',
+        email: '',
+        phone: '',
+        address: '',
+        img_url: '',
+        job_title: ''
+    })
+
+    const handleInputChange = (e) => {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value
+        })
+    }
+    // const handleImageChange = (e) => {
+    //     setUser({
+    //         ...user,
+    //         img_url: e.target.files[0]
+    //     })
+    // }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(user)
+    }
+
+    useEffect(() => {
+        setUser({
+            username: 'dnm17_',
+            full_name: 'Dani Maulana',
+            birthday: '09.03.1999',
+            email: 'danimaulana9f@gmail.com',
+            phone: '+62 8232 3010 004',
+            address: 'Karawang | IDN',
+            img_url:
+                'https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500',
+            job_title: 'CEO'
+        })
+    }, [])
+
     return (
         <Container>
             <TitleContainer>
@@ -166,72 +212,101 @@ export default function User() {
             <UserContainer>
                 <UserProfile>
                     <Top>
-                        <Image
-                            src='https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
-                            alt='not fond'
-                        />
+                        <Image src={user.img_url} alt='not fond' />
                         <TopTitle>
-                            <Name>Dani Maulana</Name>
-                            <UserTitle>CEO</UserTitle>
+                            <Name>{user.full_name}</Name>
+                            <UserTitle>{user.job_title}</UserTitle>
                         </TopTitle>
                     </Top>
                     <Bottom>
                         <UserInfoTitle>Account Details</UserInfoTitle>
                         <UserInfo>
                             <PermIdentity style={iconStyle} />
-                            <InfoTitle>dnm17_</InfoTitle>
+                            <InfoTitle>{user.username}</InfoTitle>
                         </UserInfo>
                         <UserInfo>
                             <CalendarToday style={iconStyle} />
-                            <InfoTitle>09.03.1999</InfoTitle>
+                            <InfoTitle>{user.birthday}</InfoTitle>
                         </UserInfo>
                         <UserInfoTitle>Contact Details</UserInfoTitle>
                         <UserInfo>
                             <PhoneAndroid style={iconStyle} />
-                            <InfoTitle>+62 8232 3010 004</InfoTitle>
+                            <InfoTitle>{user.phone}</InfoTitle>
                         </UserInfo>
                         <UserInfo>
                             <MailOutline style={iconStyle} />
-                            <InfoTitle>danimaulana9f@gmail.com</InfoTitle>
+                            <InfoTitle>{user.email}</InfoTitle>
                         </UserInfo>
                         <UserInfo>
                             <LocationSearching style={iconStyle} />
-                            <InfoTitle>Karawang | IDN</InfoTitle>
+                            <InfoTitle>{user.address}</InfoTitle>
                         </UserInfo>
                     </Bottom>
                 </UserProfile>
-                <FormUpdate>
+                <FormUpdate onSubmit={handleSubmit}>
                     <Left>
                         <FormTitle>Edit</FormTitle>
                         <Fields>
                             <FormField>
-                                <Label>Username</Label>
-                                <Input placeholder='dnm17_'></Input>
+                                <Label htmlFor='username'>Username</Label>
+                                <Input
+                                    onChange={handleInputChange}
+                                    name='username'
+                                    id='username'
+                                    type='text'
+                                    required
+                                    placeholder={user.username}
+                                    value={user.username}></Input>
                             </FormField>
                             <FormField>
-                                <Label>Full Name</Label>
-                                <Input placeholder='Dani Maulana'></Input>
+                                <Label htmlFor='full_name'>Full Name</Label>
+                                <Input
+                                    onChange={handleInputChange}
+                                    name='full_name'
+                                    id='full_name'
+                                    type='text'
+                                    required
+                                    placeholder={user.full_name}
+                                    value={user.full_name}></Input>
                             </FormField>
                             <FormField>
-                                <Label>Email</Label>
-                                <Input placeholder='danimaulana9f@gmail.com'></Input>
+                                <Label htmlFor='email'>Email</Label>
+                                <Input
+                                    onChange={handleInputChange}
+                                    name='email'
+                                    id='email'
+                                    type='email'
+                                    required
+                                    placeholder={user.email}
+                                    value={user.email}></Input>
                             </FormField>
                             <FormField>
-                                <Label>Phone</Label>
-                                <Input placeholder='+62 8232 3010 004'></Input>
+                                <Label htmlFor='phone'>Phone</Label>
+                                <Input
+                                    onChange={handleInputChange}
+                                    name='phone'
+                                    id='phone'
+                                    type='text'
+                                    required
+                                    placeholder={user.phone}
+                                    value={user.phone}></Input>
                             </FormField>
                             <FormField>
-                                <Label>Address</Label>
-                                <Input placeholder='Karawang | IDN'></Input>
+                                <Label htmlFor='address'>Address</Label>
+                                <Input
+                                    onChange={handleInputChange}
+                                    name='address'
+                                    id='address'
+                                    type='text'
+                                    required
+                                    placeholder={user.address}
+                                    value={user.address}></Input>
                             </FormField>
                         </Fields>
                     </Left>
                     <Right>
                         <ImageUpload>
-                            <FormImage
-                                src='https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'
-                                alt='not found'
-                            />
+                            <FormImage src={user.img_url} alt='not found' />
                             <Label
                                 style={{
                                     position: 'absolute',
@@ -240,9 +315,18 @@ export default function User() {
                                 }}>
                                 <Publish />
                             </Label>
+                            {/* <Input
+                                onChange={handleImageChange}
+                                type='file'
+                                name='img_url'
+                                id='img_url'
+                                accept='image/*'
+                                required
+                                hidden
+                            /> */}
                         </ImageUpload>
                         <UploadButton>
-                            <FormButton>Update</FormButton>
+                            <FormButton type='submit'>Update</FormButton>
                         </UploadButton>
                     </Right>
                 </FormUpdate>

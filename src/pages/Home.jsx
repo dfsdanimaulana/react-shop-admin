@@ -9,7 +9,9 @@ import Charts from '../components/Charts'
 import WidgetSm from '../components/WidgetSm'
 import WidgetLg from '../components/WidgetLg'
 
-const Container = styled.div``
+const Container = styled.div`
+    padding: 20px;
+`
 const Widget = styled.div`
     display: flex;
     margin: 20px;

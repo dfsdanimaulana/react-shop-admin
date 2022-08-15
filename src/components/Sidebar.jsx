@@ -18,12 +18,13 @@ import {
 
 const Container = styled.div`
     flex: 1;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 78px);
     position: sticky;
     top: 50px;
+    overflow: auto;
 `
 const Wrapper = styled.div`
-    padding: 20px;
+    padding: 0 20px;
     color: #555;
 `
 const Menu = styled.div`
@@ -51,10 +52,14 @@ const Item = styled.li`
 const Text = styled.span``
 const Icon = styled.span`
     margin-right: 10px;
-    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    & > svg {
+        font-size: 20px;
+        fill: #555;
+    }
 `
 
 const ListItem = ({ icon, text, to }) => {
