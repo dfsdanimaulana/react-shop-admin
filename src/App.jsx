@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 // pages
 import Home from './pages/Home'
-import UserList from './pages/UserList'
 import User from './pages/User'
+import UserList from './pages/UserList'
+import NewUser from './pages/NewUser'
 
 // components
 import Topbar from './components/Topbar'
@@ -32,6 +33,7 @@ export default function App() {
                             <Route exact path='/' component={Home} />
                             <Route path='/user/:userId' component={User} />
                             <Route path='/users' component={UserList} />
+                            <Route path='/new_user' component={NewUser} />
                         </Switch>
                     </Menu>
                 </Wrapper>

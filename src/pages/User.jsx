@@ -6,7 +6,7 @@ import {
     PhoneAndroid,
     Publish
 } from '@material-ui/icons'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { boxShadow } from '../components/FeaturedInfo'
 import { useState, useEffect } from 'react'
@@ -207,7 +207,9 @@ export default function User() {
         <Container>
             <TitleContainer>
                 <Title>Edit User</Title>
-                <TitleButton>Create</TitleButton>
+                <Link to={`/new_user`}>
+                    <TitleButton>Create</TitleButton>
+                </Link>
             </TitleContainer>
             <UserContainer>
                 <UserProfile>
