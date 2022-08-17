@@ -1,9 +1,8 @@
 import { useState } from 'react'
+import Select from 'react-select'
 import styled from 'styled-components'
 
-const Container = styled.div`
-    padding: 20px;
-`
+const Container = styled.div``
 const Title = styled.h1`
     margin-bottom: 30px;
 `
@@ -31,6 +30,7 @@ const Input = styled.input`
 const Button = styled.button`
     width: 300px;
     margin-top: 20px;
+    margin-left: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     height: 30px;
@@ -42,7 +42,6 @@ const Button = styled.button`
     &:hover {
         background-color: #028ed3;
     }
-
 `
 const Label = styled.label`
     margin-bottom: 5px;
@@ -76,37 +75,37 @@ const SelectContainer = styled.div`
     display: flex;
     flex-direction: column;
 `
-const Select = styled.select`
-    width: 400px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    height: 30px;
-`
-const SelectOption = styled.option``
 const FormSelect = styled.span``
 
 export default function NewUser() {
     const [user, setUser] = useState({
         username: '',
         full_name: '',
-        birthday: '',
         email: '',
+        password: '',
+        birthday: '',
         phone: '',
         address: '',
         img_url: '',
         job_title: '',
-        gender: ''
+        gender: 'male',
+        active: 'no'
     })
-
+    const [activeStatus, setActiveStatus] = useState({})
     const handleInputChange = (e) => {
         setUser({
             ...user,
             [e.target.name]: e.target.value
         })
     }
+
     const handleSubmit = (e) => {
+        const userData = {
+            ...user,
+            active: activeStatus
+        }
         e.preventDefault()
-        console.log(user)
+        console.log(userData)
     }
 
     return (
@@ -132,15 +131,6 @@ export default function NewUser() {
                     />
                 </FormInput>
                 <FormInput>
-                    <Label htmlFor='birthday'>Birthday</Label>
-                    <Input
-                        type='date'
-                        name='birthday'
-                        id='birthday'
-                        onChange={handleInputChange}
-                    />
-                </FormInput>
-                <FormInput>
                     <Label htmlFor='email'>Email</Label>
                     <Input
                         type='email'
@@ -149,6 +139,25 @@ export default function NewUser() {
                         onChange={handleInputChange}
                     />
                 </FormInput>
+                <FormInput>
+                    <Label htmlFor='password'>Password</Label>
+                    <Input
+                        type='password'
+                        name='password'
+                        id='password'
+                        onChange={handleInputChange}
+                    />
+                </FormInput>
+                <FormInput>
+                    <Label htmlFor='birthday'>Birthday</Label>
+                    <Input
+                        type='date'
+                        name='birthday'
+                        id='birthday'
+                        onChange={handleInputChange}
+                    />
+                </FormInput>
+
                 <FormInput>
                     <Label htmlFor='phone'>Phone</Label>
                     <Input
@@ -193,6 +202,7 @@ export default function NewUser() {
                             name='gender'
                             id='male'
                             value='male'
+                            onChange={handleInputChange}
                             defaultChecked
                         />
                         <RadioLabel htmlFor='male'>Male</RadioLabel>
@@ -201,6 +211,7 @@ export default function NewUser() {
                             type='radio'
                             name='gender'
                             id='female'
+                            onChange={handleInputChange}
                             value='female'
                         />
                         <RadioLabel htmlFor='female'>Female</RadioLabel>
@@ -209,6 +220,7 @@ export default function NewUser() {
                             type='radio'
                             name='gender'
                             id='custom'
+                            onChange={handleInputChange}
                             value='custom'
                         />
                         <RadioLabel htmlFor='custom'>Custom</RadioLabel>
@@ -217,10 +229,15 @@ export default function NewUser() {
                 <SelectContainer>
                     <FormSelect>
                         <Label htmlFor='active'>Active</Label>
-                        <Select name='active' id='active'>
-                            <SelectOption value='yes'>Yes</SelectOption>
-                            <SelectOption value='no'>No</SelectOption>
-                        </Select>
+                        <Select
+                            onChange={(e) => {
+                                setActiveStatus(e.value)
+                            }}
+                            options={[
+                                { value: 'yes', label: 'Yes' },
+                                { value: 'no', label: 'No' }
+                            ]}
+                        />
                     </FormSelect>
                 </SelectContainer>
                 <Button type='submit'>Create</Button>

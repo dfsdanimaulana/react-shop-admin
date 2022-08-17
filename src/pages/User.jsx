@@ -11,9 +11,7 @@ import styled from 'styled-components'
 import { boxShadow } from '../components/FeaturedInfo'
 import { useState, useEffect } from 'react'
 
-const Container = styled.div`
-    padding: 20px;
-`
+const Container = styled.div``
 const TitleContainer = styled.div`
     display: flex;
     justify-content: space-between;

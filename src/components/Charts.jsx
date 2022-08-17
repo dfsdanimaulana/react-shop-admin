@@ -14,8 +14,7 @@ import styled from 'styled-components'
 import { boxShadow } from './FeaturedInfo'
 
 const Container = styled.div`
-    margin: 20px;
-    padding: 20px;
+    padding: 10px;
     ${boxShadow()}
 `
 const Title = styled.h3`
